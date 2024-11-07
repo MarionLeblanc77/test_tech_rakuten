@@ -7,7 +7,7 @@ interface IProductState {
     okMsg: string[]
   }
 const initialState : IProductState= {
-    productData: '',
+    productData: undefined,
     errorMsg: [],
     okMsg: ['Coucou'],
   };
