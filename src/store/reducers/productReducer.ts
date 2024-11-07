@@ -2,12 +2,12 @@ import { createReducer } from "@reduxjs/toolkit";
 import getProductDetails from "../middlewares/getProductDetails";
 
 interface IProductState {
-    productData: any;
+    productDetails: any;
     errorMsg: string[];
     okMsg: string[]
   }
 const initialState : IProductState= {
-    productData: undefined,
+    productDetails: undefined,
     errorMsg: [],
     okMsg: ['Coucou'],
   };
@@ -16,7 +16,7 @@ const initialState : IProductState= {
     builder
     .addCase(getProductDetails.fulfilled, (state, action) => {
         console.log('Action getProductDetails fullfilled');
-        state.productData = action.payload;
+        state.productDetails = action.payload;
       });
   });
   
