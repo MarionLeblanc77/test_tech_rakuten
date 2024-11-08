@@ -56,8 +56,12 @@ function ProductDetailPage({productId}: ProductDetailPageProps) {
           </Breadcrumbs>
           <div className="productDetailPage__wrapper__product">
             <div className="productDetailPage__wrapper__product__pictures">
-              <Box sx={{ width: 60, overflowY: 'scroll' }}>
-                <ImageList variant="masonry" cols={1} gap={1}>
+              <Box sx={{ width:60, overflowY: 'scroll'}}>
+                <ImageList 
+                  variant="masonry"
+                  gap={1} 
+                  cols={1}
+                >
                     {productDetails.data.images.map((image:any) => (
                       <ImageListItem key={image.id}>
                         <img
@@ -70,14 +74,7 @@ function ProductDetailPage({productId}: ProductDetailPageProps) {
                     ))}
                 </ImageList>
               </Box>
-              
               <img src={productDetails.data.images[0].imagesUrls.entry[1].url} alt=''/>
-              
-              {/* {productDetails.data.images.map((image:any)=> (
-                <div key={image.id}>
-                  <img src={image.imagesUrls.entry[0].url} alt="" />
-                </div> */}
-              {/* ))} */}
             </div>  
             <div className="productDetailPage__wrapper__product__infos">
                 <h3>{productDetails.data.headline}</h3>
