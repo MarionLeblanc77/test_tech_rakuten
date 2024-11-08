@@ -1,17 +1,28 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createAction, createReducer } from "@reduxjs/toolkit";
 import getProductDetails from "../middlewares/getProductDetails";
 
 // TODO : productDetails should be better type with a product.d.ts file in a folder @types
 interface IProductState {
     productDetails: any;
+    pictureZoom: {
+      isPictureZoomOpen: boolean;
+      currentPicture: string;
+    };
     errorMsg: string[];
     loading: boolean
   }
 const initialState : IProductState= {
     productDetails: undefined,
+    pictureZoom: { isPictureZoomOpen: false, currentPicture: '' },
     errorMsg: [],
     loading: false,
   };
+
+  
+export const actionOpenPictureZoom = createAction<{ currentPicture: string }>(
+  'app/OPEN_PICTUREZOOM'
+);
+export const actionClosePictureZoom = createAction('app/CLOSE_PICTUREZOOM');
   
   const productReducer = createReducer(initialState, (builder) => {
     builder
@@ -43,6 +54,14 @@ const initialState : IProductState= {
       console.log('Action getProductDetails rejected');
       state.errorMsg[0]="Désolée, il y a eu une erreur."
       state.loading = false;
+    })
+    .addCase(actionOpenPictureZoom, (state, action) => {
+      state.pictureZoom.isPictureZoomOpen = true;
+      state.pictureZoom.currentPicture = action.payload.currentPicture;
+    })
+    .addCase(actionClosePictureZoom, (state) => {
+      state.pictureZoom.isPictureZoomOpen = false;
+      state.pictureZoom.currentPicture = '';
     });
   });
   
