@@ -1,5 +1,53 @@
-.productDetailPage__wrapper__product__pictures img{
+/* TODO : Improve with Sass but I had issues with MaterialUI I think */
+
+/* GLOBAL LAYOUT */
+
+.productDetailPage{
     width: 90vw;
+    margin: auto;
+    /* TODO: Not the best, needs to be adapted with the space given to header and footer ? */
+    min-height: 90vh;
+}
+
+
+/* ERROR & LOADER */
+
+.loader{
+    text-align: center;
+}
+
+.error{
+    width: fit-content;
+    margin: auto;
+}
+
+
+/* BREADCRUMBS */
+.productDetailPage__wrapper__breadcrumb {
+    background-color: white;
+    padding: 0.3rem;
+    border-radius: 5px;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+
+
+/* PRODUCT INFOS */
+
+.productDetailPage__wrapper__product {
+    background-color: white;
+    margin: 1rem auto;
+    border-radius: 5px;
+    padding: 0.5rem;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+
+.productDetailPage__wrapper__product__pictures {
+    text-align: center;
+}
+
+.productDetailPage__wrapper__product__pictures img{
+    max-width: 80vw;
+    max-height: 40vh;
 }
 
 .productDetailPage__wrapper__product__infos {
@@ -9,6 +57,39 @@
 .productDetailPage__wrapper__product__infos h3,.productDetailPage__wrapper__product__infos__rating, p {
     text-align: center;
     margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1.6em;
+}
+
+.productDetailPage__wrapper__product__infos__rating__number{
+    margin-right: 0.5rem;
+    display: inline-block;
+}
+.productDetailPage__wrapper__product__infos__rating__number p{
+    font-size: 1.5em;
+    font-weight: bold;
+    display: inline-block;
+    margin: 0;
+}
+.productDetailPage__wrapper__product__infos__rating__number span{
+    font-size: 1em;
+}
+
+.productDetailPage__wrrapper__product__infos__price{
+   text-align: center;
+}
+
+.productDetailPage__wrrapper__product__infos__price p{
+    display: inline-block;
+    margin-right: 1rem;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.productDetailPage__wrrapper__product__infos__price span{
+    text-decoration: line-through #ff0000;
 }
 
 @media (min-width: 576px) {
@@ -22,6 +103,10 @@
     .productDetailPage__wrapper__product__infos h3,.productDetailPage__wrapper__product__infos__rating, p {
         text-align: left;
     }
+
+    .productDetailPage__wrrapper__product__infos__price{
+        text-align: left;
+     }
 }
 
 
@@ -35,5 +120,6 @@
     grid-template-columns: repeat(2, 1fr);
     }
 }
+
 
 

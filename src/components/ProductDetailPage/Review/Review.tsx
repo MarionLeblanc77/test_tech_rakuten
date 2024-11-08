@@ -23,7 +23,7 @@ function Review({review}: ReviewProps) {
 
   return (
         <div className="review" id={review.id}>
-          <Card variant="outlined">
+          <Card>
             <CardContent>
               <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
                 {review.author.firstName}
