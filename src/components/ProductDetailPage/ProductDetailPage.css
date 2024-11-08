@@ -1,0 +1,39 @@
+.productDetailPage__wrapper__product__pictures img{
+    width: 90vw;
+}
+
+.productDetailPage__wrapper__product__infos {
+    margin: auto;
+    width: 70vw;
+}
+.productDetailPage__wrapper__product__infos h3,.productDetailPage__wrapper__product__infos__rating, p {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 576px) {
+    .productDetailPage__wrapper__product{
+        display: flex;
+    }
+    .productDetailPage__wrapper__product__pictures img{
+        height: 30vw;
+        width: auto;
+    }
+    .productDetailPage__wrapper__product__infos h3,.productDetailPage__wrapper__product__infos__rating, p {
+        text-align: left;
+    }
+}
+
+
+
+.productDetailPage__wrapper__reviews {
+    width: 80vw;
+    margin: auto;
+
+    @media (min-width: 576px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
