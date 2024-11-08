@@ -1,4 +1,8 @@
 .footer {
     background-color: lightgrey;
     text-align: center;
+    margin-top: 1rem;
+    /* TODO : to change when content exist */
+    display: inline-block;
+    height: 10vh;
 }
