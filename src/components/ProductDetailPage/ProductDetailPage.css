@@ -43,7 +43,10 @@
 
 .productDetailPage__wrapper__product__pictures {
     text-align: center;
+    display: flex;
+    max-height: 40vh;
 }
+
 
 .productDetailPage__wrapper__product__pictures img{
     max-width: 80vw;

@@ -1,0 +1,30 @@
+
+.picturezoom {
+    display: inline-block;
+    border-radius: 2rem;
+    z-index: 2;
+    position: absolute;
+    top: 12rem;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    width: fit-content;
+}
+
+.picturezoom--picture {
+      max-height: 90vh;
+      max-width: 90vw;
+    }
+  
+.closingButton {
+    background-color: grey;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
