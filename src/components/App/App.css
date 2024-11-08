@@ -1,7 +1,5 @@
 .App{
-    width: 90vw;
     min-height: 100vh;
-    margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

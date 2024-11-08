@@ -3,7 +3,7 @@ import './ProductDetailPage.css';
 import { useAppDispatch, useAppSelector } from '../../store/hooks-redux';
 import Review from './Review/Review';
 import getProductDetails from '../../store/middlewares/getProductDetails';
-import { Alert, Breadcrumbs, CircularProgress, Rating } from '@mui/material';
+import { Alert, Breadcrumbs, CircularProgress, Rating, Box } from '@mui/material';
 
 interface ProductDetailPageProps {
   productId: number
@@ -12,28 +12,42 @@ interface ProductDetailPageProps {
 function ProductDetailPage({productId}: ProductDetailPageProps) {
   const dispatch = useAppDispatch();
 
-
+  //Currently retrieving all the data 
+  // TODO : BUT if productDetails was better type, maybe separate this component in several and get the right data there OR store bits of needed data in different variables
   const productDetails = useAppSelector(
     (state)=> state.productReducer.productDetails
   );
+
+  // For managing error messages and loader
   const errorMsg = useAppSelector((state) => state.productReducer.errorMsg);
   const loading = useAppSelector((state) => state.productReducer.loading);
  
+  // When the component does its first render, dispatch the action that retrieves and stores product data
   useEffect(() => {
     dispatch(getProductDetails(productId));
   }, []);
   
+  // Just for the exercise to visualize the data
   console.log(productDetails)
+
+  let priceList = 0;
+  if (productDetails) {
+    if (productDetails.data.priceList>productDetails.data.buybox.salePrice) {
+      priceList = productDetails.data.priceList;
+    }
+  }
 
   return (
     <div className="productDetailPage">
       {loading && (
-        <CircularProgress />
+        <Box className='loader'>
+          <CircularProgress />
+        </Box>
       )}
       {errorMsg.length === 1 && (
-        <Alert severity="error"> {errorMsg} </Alert>
+        <Alert severity="error" className='error'> {errorMsg} </Alert>
       )}
-      {productDetails  && (
+      {productDetails && (
         <div className="productDetailPage__wrapper">
           <Breadcrumbs separator="›" aria-label="breadcrumb" className="productDetailPage__wrapper__breadcrumb">
             {productDetails.data.breadcrumbs.map((breadcrumb:any)=>(
@@ -52,13 +66,19 @@ function ProductDetailPage({productId}: ProductDetailPageProps) {
             <div className="productDetailPage__wrapper__product__infos">
                 <h3>{productDetails.data.headline}</h3>
                 <div className="productDetailPage__wrapper__product__infos__rating">
-                  {productDetails.data.globalRating.score}
+                  <div className='productDetailPage__wrapper__product__infos__rating__number'>
+                    <p>{productDetails.data.globalRating.score}</p>
+                    <span>/5</span>
+                  </div>
                   <Rating name="read-only" value={productDetails.data.globalRating.score} precision={0.5} readOnly />
                 </div>
-
                 <div dangerouslySetInnerHTML={{__html: productDetails.data.description}} /> 
-
-                <p>{productDetails.data.priceList}€</p>
+                <div className="productDetailPage__wrrapper__product__infos__price">
+                  <p>{productDetails.data.buybox.salePrice}€</p>
+                  {priceList && (
+                    <span>{priceList}€</span>
+                  )}
+                </div>
             </div>
           </div>
           <div className="productDetailPage__wrapper__reviews">
