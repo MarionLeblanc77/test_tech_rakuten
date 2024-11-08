@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks-redux';
 import Review from './Review/Review';
 import getProductDetails from '../../store/middlewares/getProductDetails';
 import { Alert, Box, Breadcrumbs, CircularProgress, ImageList, ImageListItem, Rating } from '@mui/material';
+import { actionOpenPictureZoom } from '../../store/reducers/productReducer';
+import PictureZoom from './PictureZoomModal.tsx/PictureZoomModal';
 
 interface ProductDetailPageProps {
   productId: number
@@ -37,6 +39,18 @@ function ProductDetailPage({productId}: ProductDetailPageProps) {
     }
   }
 
+  const handlePictureZoom = (currentPicture: string) => {
+    dispatch(actionOpenPictureZoom({ currentPicture }));
+  };
+
+  const currentPictureForZoom = useAppSelector(
+    (state) => state.productReducer.pictureZoom.currentPicture
+  );
+
+  const isPictureZoomOpen = useAppSelector(
+    (state) => state.productReducer.pictureZoom.isPictureZoomOpen
+  );
+
   return (
     <div className="productDetailPage">
       {loading && (
@@ -54,6 +68,7 @@ function ProductDetailPage({productId}: ProductDetailPageProps) {
             <div id={breadcrumb.url}>{breadcrumb.label}</div>)
           )}
           </Breadcrumbs>
+          {isPictureZoomOpen && <PictureZoom picture={currentPictureForZoom} />}
           <div className="productDetailPage__wrapper__product">
             <div className="productDetailPage__wrapper__product__pictures">
               <Box sx={{ width:60, overflowY: 'scroll'}}>
@@ -69,6 +84,8 @@ function ProductDetailPage({productId}: ProductDetailPageProps) {
                           src={`${image.imagesUrls.entry[0].url}?w=248&fit=crop&auto=format`}
                           alt=""
                           loading="lazy"
+                          role="button"
+                          onClick={() => handlePictureZoom(image.imagesUrls.entry[2].url!)}
                         />
                       </ImageListItem>
                     ))}
