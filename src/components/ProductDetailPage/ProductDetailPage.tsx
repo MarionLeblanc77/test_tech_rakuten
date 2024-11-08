@@ -3,7 +3,7 @@ import './ProductDetailPage.css';
 import { useAppDispatch, useAppSelector } from '../../store/hooks-redux';
 import Review from './Review/Review';
 import getProductDetails from '../../store/middlewares/getProductDetails';
-import { Alert, Breadcrumbs, CircularProgress, Rating, Box } from '@mui/material';
+import { Alert, Box, Breadcrumbs, CircularProgress, ImageList, ImageListItem, Rating } from '@mui/material';
 
 interface ProductDetailPageProps {
   productId: number
@@ -56,7 +56,23 @@ function ProductDetailPage({productId}: ProductDetailPageProps) {
           </Breadcrumbs>
           <div className="productDetailPage__wrapper__product">
             <div className="productDetailPage__wrapper__product__pictures">
+              <Box sx={{ width: 60, overflowY: 'scroll' }}>
+                <ImageList variant="masonry" cols={1} gap={1}>
+                    {productDetails.data.images.map((image:any) => (
+                      <ImageListItem key={image.id}>
+                        <img
+                          srcSet={`${image.imagesUrls.entry[0].url}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                          src={`${image.imagesUrls.entry[0].url}?w=248&fit=crop&auto=format`}
+                          alt=""
+                          loading="lazy"
+                        />
+                      </ImageListItem>
+                    ))}
+                </ImageList>
+              </Box>
+              
               <img src={productDetails.data.images[0].imagesUrls.entry[1].url} alt=''/>
+              
               {/* {productDetails.data.images.map((image:any)=> (
                 <div key={image.id}>
                   <img src={image.imagesUrls.entry[0].url} alt="" />
